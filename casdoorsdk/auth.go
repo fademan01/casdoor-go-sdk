@@ -16,12 +16,17 @@ package casdoorsdk
 
 import (
 	"context"
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"net/http"
 	"strings"
 
+	gclient "github.com/casdoor/casdoor-go-sdk/client"
 	"golang.org/x/oauth2"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/metadata"
 )
 
 // AuthConfig is the core configuration.
@@ -37,6 +42,7 @@ type AuthConfig struct {
 
 type Client struct {
 	AuthConfig
+	*gclient.GRPCClient
 }
 
 // HttpClient interface has the method required to use a type as custom http client.
@@ -73,9 +79,22 @@ func NewClient(endpoint string, clientId string, clientSecret string, certificat
 }
 
 func NewClientWithConf(config *AuthConfig) *Client {
+	client, err := gclient.NewGRPCClient(
+		config.Endpoint, true, grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
+	if err != nil {
+		panic(err)
+	}
 	return &Client{
 		*config,
+		client,
 	}
+}
+func (c *Client) withBasicAuth(ctx context.Context) context.Context {
+	auth := c.ClientId + ":" + c.ClientSecret
+	encoded := base64.StdEncoding.EncodeToString([]byte(auth))
+	md := metadata.Pairs("authorization", "Basic "+encoded)
+	return metadata.NewOutgoingContext(ctx, md)
 }
 
 // SetHttpClient sets custom http Client.
