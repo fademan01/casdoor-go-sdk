@@ -90,98 +90,283 @@ func (x *ManagedAccount) GetSigninUrl() string {
 	return ""
 }
 
+type MfaAccount struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccountName   string                 `protobuf:"bytes,1,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
+	Issuer        string                 `protobuf:"bytes,2,opt,name=issuer,proto3" json:"issuer,omitempty"`
+	SecretKey     string                 `protobuf:"bytes,3,opt,name=secret_key,json=secretKey,proto3" json:"secret_key,omitempty"`
+	Origin        string                 `protobuf:"bytes,4,opt,name=origin,proto3" json:"origin,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MfaAccount) Reset() {
+	*x = MfaAccount{}
+	mi := &file_api_v1_user_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MfaAccount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MfaAccount) ProtoMessage() {}
+
+func (x *MfaAccount) ProtoReflect() protoreflect.Message {
+	mi := &file_api_v1_user_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MfaAccount.ProtoReflect.Descriptor instead.
+func (*MfaAccount) Descriptor() ([]byte, []int) {
+	return file_api_v1_user_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *MfaAccount) GetAccountName() string {
+	if x != nil {
+		return x.AccountName
+	}
+	return ""
+}
+
+func (x *MfaAccount) GetIssuer() string {
+	if x != nil {
+		return x.Issuer
+	}
+	return ""
+}
+
+func (x *MfaAccount) GetSecretKey() string {
+	if x != nil {
+		return x.SecretKey
+	}
+	return ""
+}
+
+func (x *MfaAccount) GetOrigin() string {
+	if x != nil {
+		return x.Origin
+	}
+	return ""
+}
+
+type MfaItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Rule          string                 `protobuf:"bytes,2,opt,name=rule,proto3" json:"rule,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MfaItem) Reset() {
+	*x = MfaItem{}
+	mi := &file_api_v1_user_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MfaItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MfaItem) ProtoMessage() {}
+
+func (x *MfaItem) ProtoReflect() protoreflect.Message {
+	mi := &file_api_v1_user_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MfaItem.ProtoReflect.Descriptor instead.
+func (*MfaItem) Descriptor() ([]byte, []int) {
+	return file_api_v1_user_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *MfaItem) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *MfaItem) GetRule() string {
+	if x != nil {
+		return x.Rule
+	}
+	return ""
+}
+
 // Main User message mirroring the Go struct (simplified for gRPC)
 type User struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Owner             string                 `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
-	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	CreatedTime       string                 `protobuf:"bytes,3,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
-	UpdatedTime       string                 `protobuf:"bytes,4,opt,name=updated_time,json=updatedTime,proto3" json:"updated_time,omitempty"`
-	Id                string                 `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"`
-	ExternalId        string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	Type              string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
-	Password          string                 `protobuf:"bytes,8,opt,name=password,proto3" json:"password,omitempty"`
-	PasswordSalt      string                 `protobuf:"bytes,9,opt,name=password_salt,json=passwordSalt,proto3" json:"password_salt,omitempty"`
-	PasswordType      string                 `protobuf:"bytes,10,opt,name=password_type,json=passwordType,proto3" json:"password_type,omitempty"`
-	DisplayName       string                 `protobuf:"bytes,11,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	FirstName         string                 `protobuf:"bytes,12,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName          string                 `protobuf:"bytes,13,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
-	Avatar            string                 `protobuf:"bytes,14,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	AvatarType        string                 `protobuf:"bytes,15,opt,name=avatar_type,json=avatarType,proto3" json:"avatar_type,omitempty"`
-	PermanentAvatar   string                 `protobuf:"bytes,16,opt,name=permanent_avatar,json=permanentAvatar,proto3" json:"permanent_avatar,omitempty"`
-	Email             string                 `protobuf:"bytes,17,opt,name=email,proto3" json:"email,omitempty"`
-	EmailVerified     bool                   `protobuf:"varint,18,opt,name=email_verified,json=emailVerified,proto3" json:"email_verified,omitempty"`
-	Phone             string                 `protobuf:"bytes,19,opt,name=phone,proto3" json:"phone,omitempty"`
-	CountryCode       string                 `protobuf:"bytes,20,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
-	Region            string                 `protobuf:"bytes,21,opt,name=region,proto3" json:"region,omitempty"`
-	Location          string                 `protobuf:"bytes,22,opt,name=location,proto3" json:"location,omitempty"`
-	Address           []string               `protobuf:"bytes,23,rep,name=address,proto3" json:"address,omitempty"`
-	Affiliation       string                 `protobuf:"bytes,24,opt,name=affiliation,proto3" json:"affiliation,omitempty"`
-	Title             string                 `protobuf:"bytes,25,opt,name=title,proto3" json:"title,omitempty"`
-	IdCardType        string                 `protobuf:"bytes,26,opt,name=id_card_type,json=idCardType,proto3" json:"id_card_type,omitempty"`
-	IdCard            string                 `protobuf:"bytes,27,opt,name=id_card,json=idCard,proto3" json:"id_card,omitempty"`
-	Homepage          string                 `protobuf:"bytes,28,opt,name=homepage,proto3" json:"homepage,omitempty"`
-	Bio               string                 `protobuf:"bytes,29,opt,name=bio,proto3" json:"bio,omitempty"`
-	Tag               string                 `protobuf:"bytes,30,opt,name=tag,proto3" json:"tag,omitempty"`
-	Language          string                 `protobuf:"bytes,31,opt,name=language,proto3" json:"language,omitempty"`
-	Gender            string                 `protobuf:"bytes,32,opt,name=gender,proto3" json:"gender,omitempty"`
-	Birthday          string                 `protobuf:"bytes,33,opt,name=birthday,proto3" json:"birthday,omitempty"`
-	Education         string                 `protobuf:"bytes,34,opt,name=education,proto3" json:"education,omitempty"`
-	Score             int32                  `protobuf:"varint,35,opt,name=score,proto3" json:"score,omitempty"`
-	Karma             int32                  `protobuf:"varint,36,opt,name=karma,proto3" json:"karma,omitempty"`
-	Ranking           int32                  `protobuf:"varint,37,opt,name=ranking,proto3" json:"ranking,omitempty"`
-	IsDefaultAvatar   bool                   `protobuf:"varint,38,opt,name=is_default_avatar,json=isDefaultAvatar,proto3" json:"is_default_avatar,omitempty"`
-	IsOnline          bool                   `protobuf:"varint,39,opt,name=is_online,json=isOnline,proto3" json:"is_online,omitempty"`
-	IsAdmin           bool                   `protobuf:"varint,40,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
-	IsForbidden       bool                   `protobuf:"varint,41,opt,name=is_forbidden,json=isForbidden,proto3" json:"is_forbidden,omitempty"`
-	IsDeleted         bool                   `protobuf:"varint,42,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
-	SignupApplication string                 `protobuf:"bytes,43,opt,name=signup_application,json=signupApplication,proto3" json:"signup_application,omitempty"`
-	Hash              string                 `protobuf:"bytes,44,opt,name=hash,proto3" json:"hash,omitempty"`
-	PreHash           string                 `protobuf:"bytes,45,opt,name=pre_hash,json=preHash,proto3" json:"pre_hash,omitempty"`
-	AccessKey         string                 `protobuf:"bytes,46,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
-	AccessSecret      string                 `protobuf:"bytes,47,opt,name=access_secret,json=accessSecret,proto3" json:"access_secret,omitempty"`
-	CreatedIp         string                 `protobuf:"bytes,48,opt,name=created_ip,json=createdIp,proto3" json:"created_ip,omitempty"`
-	LastSigninTime    string                 `protobuf:"bytes,49,opt,name=last_signin_time,json=lastSigninTime,proto3" json:"last_signin_time,omitempty"`
-	LastSigninIp      string                 `protobuf:"bytes,50,opt,name=last_signin_ip,json=lastSigninIp,proto3" json:"last_signin_ip,omitempty"`
-	// Social logins (only a few shown for brevity; you can add more if needed)
-	Github                 string            `protobuf:"bytes,51,opt,name=github,proto3" json:"github,omitempty"`
-	Google                 string            `protobuf:"bytes,52,opt,name=google,proto3" json:"google,omitempty"`
-	Qq                     string            `protobuf:"bytes,53,opt,name=qq,proto3" json:"qq,omitempty"`
-	Wechat                 string            `protobuf:"bytes,54,opt,name=wechat,proto3" json:"wechat,omitempty"`
-	Facebook               string            `protobuf:"bytes,55,opt,name=facebook,proto3" json:"facebook,omitempty"`
-	Dingtalk               string            `protobuf:"bytes,56,opt,name=dingtalk,proto3" json:"dingtalk,omitempty"`
-	Weibo                  string            `protobuf:"bytes,57,opt,name=weibo,proto3" json:"weibo,omitempty"`
-	Gitee                  string            `protobuf:"bytes,58,opt,name=gitee,proto3" json:"gitee,omitempty"`
-	Linkedin               string            `protobuf:"bytes,59,opt,name=linkedin,proto3" json:"linkedin,omitempty"`
-	Wecom                  string            `protobuf:"bytes,60,opt,name=wecom,proto3" json:"wecom,omitempty"`
-	Lark                   string            `protobuf:"bytes,61,opt,name=lark,proto3" json:"lark,omitempty"`
-	Gitlab                 string            `protobuf:"bytes,62,opt,name=gitlab,proto3" json:"gitlab,omitempty"`
-	Adfs                   string            `protobuf:"bytes,63,opt,name=adfs,proto3" json:"adfs,omitempty"`
-	Baidu                  string            `protobuf:"bytes,64,opt,name=baidu,proto3" json:"baidu,omitempty"`
-	Alipay                 string            `protobuf:"bytes,65,opt,name=alipay,proto3" json:"alipay,omitempty"`
-	Casdoor                string            `protobuf:"bytes,66,opt,name=casdoor,proto3" json:"casdoor,omitempty"`
-	PreferredMfaType       string            `protobuf:"bytes,67,opt,name=preferred_mfa_type,json=preferredMfaType,proto3" json:"preferred_mfa_type,omitempty"`
-	RecoveryCodes          []string          `protobuf:"bytes,68,rep,name=recovery_codes,json=recoveryCodes,proto3" json:"recovery_codes,omitempty"`
-	TotpSecret             string            `protobuf:"bytes,69,opt,name=totp_secret,json=totpSecret,proto3" json:"totp_secret,omitempty"`
-	MfaPhoneEnabled        bool              `protobuf:"varint,70,opt,name=mfa_phone_enabled,json=mfaPhoneEnabled,proto3" json:"mfa_phone_enabled,omitempty"`
-	MfaEmailEnabled        bool              `protobuf:"varint,71,opt,name=mfa_email_enabled,json=mfaEmailEnabled,proto3" json:"mfa_email_enabled,omitempty"`
-	Invitation             string            `protobuf:"bytes,72,opt,name=invitation,proto3" json:"invitation,omitempty"`
-	InvitationCode         string            `protobuf:"bytes,73,opt,name=invitation_code,json=invitationCode,proto3" json:"invitation_code,omitempty"`
-	Ldap                   string            `protobuf:"bytes,74,opt,name=ldap,proto3" json:"ldap,omitempty"`
-	Properties             map[string]string `protobuf:"bytes,75,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Groups                 []string          `protobuf:"bytes,76,rep,name=groups,proto3" json:"groups,omitempty"`
-	LastChangePasswordTime string            `protobuf:"bytes,77,opt,name=last_change_password_time,json=lastChangePasswordTime,proto3" json:"last_change_password_time,omitempty"`
-	LastSigninWrongTime    string            `protobuf:"bytes,78,opt,name=last_signin_wrong_time,json=lastSigninWrongTime,proto3" json:"last_signin_wrong_time,omitempty"`
-	SigninWrongTimes       int32             `protobuf:"varint,79,opt,name=signin_wrong_times,json=signinWrongTimes,proto3" json:"signin_wrong_times,omitempty"`
-	ManagedAccounts        []*ManagedAccount `protobuf:"bytes,80,rep,name=managed_accounts,json=managedAccounts,proto3" json:"managed_accounts,omitempty"`
-	NeedUpdatePassword     bool              `protobuf:"varint,81,opt,name=need_update_password,json=needUpdatePassword,proto3" json:"need_update_password,omitempty"`
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	Owner                  string                 `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
+	Name                   string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	CreatedTime            string                 `protobuf:"bytes,3,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
+	UpdatedTime            string                 `protobuf:"bytes,4,opt,name=updated_time,json=updatedTime,proto3" json:"updated_time,omitempty"`
+	Id                     string                 `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"`
+	ExternalId             string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	Type                   string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
+	Password               string                 `protobuf:"bytes,8,opt,name=password,proto3" json:"password,omitempty"`
+	PasswordSalt           string                 `protobuf:"bytes,9,opt,name=password_salt,json=passwordSalt,proto3" json:"password_salt,omitempty"`
+	PasswordType           string                 `protobuf:"bytes,10,opt,name=password_type,json=passwordType,proto3" json:"password_type,omitempty"`
+	DisplayName            string                 `protobuf:"bytes,11,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	FirstName              string                 `protobuf:"bytes,12,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName               string                 `protobuf:"bytes,13,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	Avatar                 string                 `protobuf:"bytes,14,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	AvatarType             string                 `protobuf:"bytes,15,opt,name=avatar_type,json=avatarType,proto3" json:"avatar_type,omitempty"`
+	PermanentAvatar        string                 `protobuf:"bytes,16,opt,name=permanent_avatar,json=permanentAvatar,proto3" json:"permanent_avatar,omitempty"`
+	Email                  string                 `protobuf:"bytes,17,opt,name=email,proto3" json:"email,omitempty"`
+	EmailVerified          bool                   `protobuf:"varint,18,opt,name=email_verified,json=emailVerified,proto3" json:"email_verified,omitempty"`
+	Phone                  string                 `protobuf:"bytes,19,opt,name=phone,proto3" json:"phone,omitempty"`
+	CountryCode            string                 `protobuf:"bytes,20,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
+	Region                 string                 `protobuf:"bytes,21,opt,name=region,proto3" json:"region,omitempty"`
+	Location               string                 `protobuf:"bytes,22,opt,name=location,proto3" json:"location,omitempty"`
+	Address                []string               `protobuf:"bytes,23,rep,name=address,proto3" json:"address,omitempty"`
+	Affiliation            string                 `protobuf:"bytes,24,opt,name=affiliation,proto3" json:"affiliation,omitempty"`
+	Title                  string                 `protobuf:"bytes,25,opt,name=title,proto3" json:"title,omitempty"`
+	IdCardType             string                 `protobuf:"bytes,26,opt,name=id_card_type,json=idCardType,proto3" json:"id_card_type,omitempty"`
+	IdCard                 string                 `protobuf:"bytes,27,opt,name=id_card,json=idCard,proto3" json:"id_card,omitempty"`
+	Homepage               string                 `protobuf:"bytes,28,opt,name=homepage,proto3" json:"homepage,omitempty"`
+	Bio                    string                 `protobuf:"bytes,29,opt,name=bio,proto3" json:"bio,omitempty"`
+	Tag                    string                 `protobuf:"bytes,30,opt,name=tag,proto3" json:"tag,omitempty"`
+	Language               string                 `protobuf:"bytes,31,opt,name=language,proto3" json:"language,omitempty"`
+	Gender                 string                 `protobuf:"bytes,32,opt,name=gender,proto3" json:"gender,omitempty"`
+	Birthday               string                 `protobuf:"bytes,33,opt,name=birthday,proto3" json:"birthday,omitempty"`
+	Education              string                 `protobuf:"bytes,34,opt,name=education,proto3" json:"education,omitempty"`
+	Score                  int32                  `protobuf:"varint,35,opt,name=score,proto3" json:"score,omitempty"`
+	Karma                  int32                  `protobuf:"varint,36,opt,name=karma,proto3" json:"karma,omitempty"`
+	Ranking                int32                  `protobuf:"varint,37,opt,name=ranking,proto3" json:"ranking,omitempty"`
+	IsDefaultAvatar        bool                   `protobuf:"varint,38,opt,name=is_default_avatar,json=isDefaultAvatar,proto3" json:"is_default_avatar,omitempty"`
+	IsOnline               bool                   `protobuf:"varint,39,opt,name=is_online,json=isOnline,proto3" json:"is_online,omitempty"`
+	IsAdmin                bool                   `protobuf:"varint,40,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
+	IsForbidden            bool                   `protobuf:"varint,41,opt,name=is_forbidden,json=isForbidden,proto3" json:"is_forbidden,omitempty"`
+	IsDeleted              bool                   `protobuf:"varint,42,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	SignupApplication      string                 `protobuf:"bytes,43,opt,name=signup_application,json=signupApplication,proto3" json:"signup_application,omitempty"`
+	Hash                   string                 `protobuf:"bytes,44,opt,name=hash,proto3" json:"hash,omitempty"`
+	PreHash                string                 `protobuf:"bytes,45,opt,name=pre_hash,json=preHash,proto3" json:"pre_hash,omitempty"`
+	AccessKey              string                 `protobuf:"bytes,46,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
+	AccessSecret           string                 `protobuf:"bytes,47,opt,name=access_secret,json=accessSecret,proto3" json:"access_secret,omitempty"`
+	CreatedIp              string                 `protobuf:"bytes,48,opt,name=created_ip,json=createdIp,proto3" json:"created_ip,omitempty"`
+	LastSigninTime         string                 `protobuf:"bytes,49,opt,name=last_signin_time,json=lastSigninTime,proto3" json:"last_signin_time,omitempty"`
+	LastSigninIp           string                 `protobuf:"bytes,50,opt,name=last_signin_ip,json=lastSigninIp,proto3" json:"last_signin_ip,omitempty"`
+	GitHub                 string                 `protobuf:"bytes,51,opt,name=git_hub,json=gitHub,proto3" json:"git_hub,omitempty"`
+	Google                 string                 `protobuf:"bytes,52,opt,name=google,proto3" json:"google,omitempty"`
+	Qq                     string                 `protobuf:"bytes,53,opt,name=qq,proto3" json:"qq,omitempty"`
+	WeChat                 string                 `protobuf:"bytes,54,opt,name=we_chat,json=weChat,proto3" json:"we_chat,omitempty"`
+	Facebook               string                 `protobuf:"bytes,55,opt,name=facebook,proto3" json:"facebook,omitempty"`
+	DingTalk               string                 `protobuf:"bytes,56,opt,name=ding_talk,json=dingTalk,proto3" json:"ding_talk,omitempty"`
+	Weibo                  string                 `protobuf:"bytes,57,opt,name=weibo,proto3" json:"weibo,omitempty"`
+	Gitee                  string                 `protobuf:"bytes,58,opt,name=gitee,proto3" json:"gitee,omitempty"`
+	LinkedIn               string                 `protobuf:"bytes,59,opt,name=linked_in,json=linkedIn,proto3" json:"linked_in,omitempty"`
+	Wecom                  string                 `protobuf:"bytes,60,opt,name=wecom,proto3" json:"wecom,omitempty"`
+	Lark                   string                 `protobuf:"bytes,61,opt,name=lark,proto3" json:"lark,omitempty"`
+	Gitlab                 string                 `protobuf:"bytes,62,opt,name=gitlab,proto3" json:"gitlab,omitempty"`
+	Adfs                   string                 `protobuf:"bytes,63,opt,name=adfs,proto3" json:"adfs,omitempty"`
+	Baidu                  string                 `protobuf:"bytes,64,opt,name=baidu,proto3" json:"baidu,omitempty"`
+	Alipay                 string                 `protobuf:"bytes,65,opt,name=alipay,proto3" json:"alipay,omitempty"`
+	Casdoor                string                 `protobuf:"bytes,66,opt,name=casdoor,proto3" json:"casdoor,omitempty"`
+	Infoflow               string                 `protobuf:"bytes,67,opt,name=infoflow,proto3" json:"infoflow,omitempty"`
+	Apple                  string                 `protobuf:"bytes,68,opt,name=apple,proto3" json:"apple,omitempty"`
+	AzureAd                string                 `protobuf:"bytes,69,opt,name=azure_ad,json=azureAd,proto3" json:"azure_ad,omitempty"`
+	Slack                  string                 `protobuf:"bytes,70,opt,name=slack,proto3" json:"slack,omitempty"`
+	Steam                  string                 `protobuf:"bytes,71,opt,name=steam,proto3" json:"steam,omitempty"`
+	Bilibili               string                 `protobuf:"bytes,72,opt,name=bilibili,proto3" json:"bilibili,omitempty"`
+	Okta                   string                 `protobuf:"bytes,73,opt,name=okta,proto3" json:"okta,omitempty"`
+	Douyin                 string                 `protobuf:"bytes,74,opt,name=douyin,proto3" json:"douyin,omitempty"`
+	Line                   string                 `protobuf:"bytes,75,opt,name=line,proto3" json:"line,omitempty"`
+	Amazon                 string                 `protobuf:"bytes,76,opt,name=amazon,proto3" json:"amazon,omitempty"`
+	Auth0                  string                 `protobuf:"bytes,77,opt,name=auth0,proto3" json:"auth0,omitempty"`
+	BattleNet              string                 `protobuf:"bytes,78,opt,name=battle_net,json=battleNet,proto3" json:"battle_net,omitempty"`
+	Bitbucket              string                 `protobuf:"bytes,79,opt,name=bitbucket,proto3" json:"bitbucket,omitempty"`
+	Box                    string                 `protobuf:"bytes,80,opt,name=box,proto3" json:"box,omitempty"`
+	CloudFoundry           string                 `protobuf:"bytes,81,opt,name=cloud_foundry,json=cloudFoundry,proto3" json:"cloud_foundry,omitempty"`
+	Dailymotion            string                 `protobuf:"bytes,82,opt,name=dailymotion,proto3" json:"dailymotion,omitempty"`
+	Deezer                 string                 `protobuf:"bytes,83,opt,name=deezer,proto3" json:"deezer,omitempty"`
+	DigitalOcean           string                 `protobuf:"bytes,84,opt,name=digital_ocean,json=digitalOcean,proto3" json:"digital_ocean,omitempty"`
+	Discord                string                 `protobuf:"bytes,85,opt,name=discord,proto3" json:"discord,omitempty"`
+	Dropbox                string                 `protobuf:"bytes,86,opt,name=dropbox,proto3" json:"dropbox,omitempty"`
+	EveOnline              string                 `protobuf:"bytes,87,opt,name=eve_online,json=eveOnline,proto3" json:"eve_online,omitempty"`
+	Fitbit                 string                 `protobuf:"bytes,88,opt,name=fitbit,proto3" json:"fitbit,omitempty"`
+	Gitea                  string                 `protobuf:"bytes,89,opt,name=gitea,proto3" json:"gitea,omitempty"`
+	Heroku                 string                 `protobuf:"bytes,90,opt,name=heroku,proto3" json:"heroku,omitempty"`
+	InfluxCloud            string                 `protobuf:"bytes,91,opt,name=influx_cloud,json=influxCloud,proto3" json:"influx_cloud,omitempty"`
+	Instagram              string                 `protobuf:"bytes,92,opt,name=instagram,proto3" json:"instagram,omitempty"`
+	Intercom               string                 `protobuf:"bytes,93,opt,name=intercom,proto3" json:"intercom,omitempty"`
+	Kakao                  string                 `protobuf:"bytes,94,opt,name=kakao,proto3" json:"kakao,omitempty"`
+	Lastfm                 string                 `protobuf:"bytes,95,opt,name=lastfm,proto3" json:"lastfm,omitempty"`
+	Mailru                 string                 `protobuf:"bytes,96,opt,name=mailru,proto3" json:"mailru,omitempty"`
+	Meetup                 string                 `protobuf:"bytes,97,opt,name=meetup,proto3" json:"meetup,omitempty"`
+	MicrosoftOnline        string                 `protobuf:"bytes,98,opt,name=microsoft_online,json=microsoftOnline,proto3" json:"microsoft_online,omitempty"`
+	Naver                  string                 `protobuf:"bytes,99,opt,name=naver,proto3" json:"naver,omitempty"`
+	Nextcloud              string                 `protobuf:"bytes,100,opt,name=nextcloud,proto3" json:"nextcloud,omitempty"`
+	OneDrive               string                 `protobuf:"bytes,101,opt,name=one_drive,json=oneDrive,proto3" json:"one_drive,omitempty"`
+	Oura                   string                 `protobuf:"bytes,102,opt,name=oura,proto3" json:"oura,omitempty"`
+	Patreon                string                 `protobuf:"bytes,103,opt,name=patreon,proto3" json:"patreon,omitempty"`
+	Paypal                 string                 `protobuf:"bytes,104,opt,name=paypal,proto3" json:"paypal,omitempty"`
+	SalesForce             string                 `protobuf:"bytes,105,opt,name=sales_force,json=salesForce,proto3" json:"sales_force,omitempty"`
+	Shopify                string                 `protobuf:"bytes,106,opt,name=shopify,proto3" json:"shopify,omitempty"`
+	Soundcloud             string                 `protobuf:"bytes,107,opt,name=soundcloud,proto3" json:"soundcloud,omitempty"`
+	Spotify                string                 `protobuf:"bytes,108,opt,name=spotify,proto3" json:"spotify,omitempty"`
+	Strava                 string                 `protobuf:"bytes,109,opt,name=strava,proto3" json:"strava,omitempty"`
+	Stripe                 string                 `protobuf:"bytes,110,opt,name=stripe,proto3" json:"stripe,omitempty"`
+	TikTok                 string                 `protobuf:"bytes,111,opt,name=tik_tok,json=tikTok,proto3" json:"tik_tok,omitempty"`
+	Tumblr                 string                 `protobuf:"bytes,112,opt,name=tumblr,proto3" json:"tumblr,omitempty"`
+	Twitch                 string                 `protobuf:"bytes,113,opt,name=twitch,proto3" json:"twitch,omitempty"`
+	Twitter                string                 `protobuf:"bytes,114,opt,name=twitter,proto3" json:"twitter,omitempty"`
+	Typetalk               string                 `protobuf:"bytes,115,opt,name=typetalk,proto3" json:"typetalk,omitempty"`
+	Uber                   string                 `protobuf:"bytes,116,opt,name=uber,proto3" json:"uber,omitempty"`
+	Vk                     string                 `protobuf:"bytes,117,opt,name=vk,proto3" json:"vk,omitempty"`
+	Wepay                  string                 `protobuf:"bytes,118,opt,name=wepay,proto3" json:"wepay,omitempty"`
+	Xero                   string                 `protobuf:"bytes,119,opt,name=xero,proto3" json:"xero,omitempty"`
+	Yahoo                  string                 `protobuf:"bytes,120,opt,name=yahoo,proto3" json:"yahoo,omitempty"`
+	Yammer                 string                 `protobuf:"bytes,121,opt,name=yammer,proto3" json:"yammer,omitempty"`
+	Yandex                 string                 `protobuf:"bytes,122,opt,name=yandex,proto3" json:"yandex,omitempty"`
+	Zoom                   string                 `protobuf:"bytes,123,opt,name=zoom,proto3" json:"zoom,omitempty"`
+	MetaMask               string                 `protobuf:"bytes,124,opt,name=meta_mask,json=metaMask,proto3" json:"meta_mask,omitempty"`
+	Web3Onboard            string                 `protobuf:"bytes,125,opt,name=web3_onboard,json=web3Onboard,proto3" json:"web3_onboard,omitempty"`
+	Custom                 string                 `protobuf:"bytes,126,opt,name=custom,proto3" json:"custom,omitempty"`
+	PreferredMfaType       string                 `protobuf:"bytes,127,opt,name=preferred_mfa_type,json=preferredMfaType,proto3" json:"preferred_mfa_type,omitempty"`
+	RecoveryCodes          []string               `protobuf:"bytes,128,rep,name=recovery_codes,json=recoveryCodes,proto3" json:"recovery_codes,omitempty"`
+	TotpSecret             string                 `protobuf:"bytes,129,opt,name=totp_secret,json=totpSecret,proto3" json:"totp_secret,omitempty"`
+	MfaPhoneEnabled        bool                   `protobuf:"varint,130,opt,name=mfa_phone_enabled,json=mfaPhoneEnabled,proto3" json:"mfa_phone_enabled,omitempty"`
+	MfaEmailEnabled        bool                   `protobuf:"varint,131,opt,name=mfa_email_enabled,json=mfaEmailEnabled,proto3" json:"mfa_email_enabled,omitempty"`
+	Invitation             string                 `protobuf:"bytes,132,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	InvitationCode         string                 `protobuf:"bytes,133,opt,name=invitation_code,json=invitationCode,proto3" json:"invitation_code,omitempty"`
+	Ldap                   string                 `protobuf:"bytes,134,opt,name=ldap,proto3" json:"ldap,omitempty"`
+	Properties             map[string]string      `protobuf:"bytes,135,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Role                   *Role                  `protobuf:"bytes,136,opt,name=role,proto3" json:"role,omitempty"`
+	Permission             *Permission            `protobuf:"bytes,137,opt,name=permission,proto3" json:"permission,omitempty"`
+	Groups                 []string               `protobuf:"bytes,138,rep,name=groups,proto3" json:"groups,omitempty"`
+	LastChangePasswordTime string                 `protobuf:"bytes,139,opt,name=last_change_password_time,json=lastChangePasswordTime,proto3" json:"last_change_password_time,omitempty"`
+	LastSigninWrongTime    string                 `protobuf:"bytes,140,opt,name=last_signin_wrong_time,json=lastSigninWrongTime,proto3" json:"last_signin_wrong_time,omitempty"`
+	SigninWrongTimes       int32                  `protobuf:"varint,141,opt,name=signin_wrong_times,json=signinWrongTimes,proto3" json:"signin_wrong_times,omitempty"`
+	ManagedAccounts        []*ManagedAccount      `protobuf:"bytes,142,rep,name=managed_accounts,json=managedAccounts,proto3" json:"managed_accounts,omitempty"`
+	MfaAccounts            []*MfaAccount          `protobuf:"bytes,143,rep,name=mfa_accounts,json=mfaAccounts,proto3" json:"mfa_accounts,omitempty"`
+	MfaItems               []*MfaItem             `protobuf:"bytes,144,rep,name=mfa_items,json=mfaItems,proto3" json:"mfa_items,omitempty"`
+	MfaRememberDeadline    string                 `protobuf:"bytes,145,opt,name=mfa_remember_deadline,json=mfaRememberDeadline,proto3" json:"mfa_remember_deadline,omitempty"`
+	NeedUpdatePassword     bool                   `protobuf:"varint,146,opt,name=need_update_password,json=needUpdatePassword,proto3" json:"need_update_password,omitempty"`
+	IpWhitelist            string                 `protobuf:"bytes,147,opt,name=ip_whitelist,json=ipWhitelist,proto3" json:"ip_whitelist,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_api_v1_user_proto_msgTypes[1]
+	mi := &file_api_v1_user_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -193,7 +378,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[1]
+	mi := &file_api_v1_user_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -206,7 +391,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{1}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *User) GetOwner() string {
@@ -559,9 +744,9 @@ func (x *User) GetLastSigninIp() string {
 	return ""
 }
 
-func (x *User) GetGithub() string {
+func (x *User) GetGitHub() string {
 	if x != nil {
-		return x.Github
+		return x.GitHub
 	}
 	return ""
 }
@@ -580,9 +765,9 @@ func (x *User) GetQq() string {
 	return ""
 }
 
-func (x *User) GetWechat() string {
+func (x *User) GetWeChat() string {
 	if x != nil {
-		return x.Wechat
+		return x.WeChat
 	}
 	return ""
 }
@@ -594,9 +779,9 @@ func (x *User) GetFacebook() string {
 	return ""
 }
 
-func (x *User) GetDingtalk() string {
+func (x *User) GetDingTalk() string {
 	if x != nil {
-		return x.Dingtalk
+		return x.DingTalk
 	}
 	return ""
 }
@@ -615,9 +800,9 @@ func (x *User) GetGitee() string {
 	return ""
 }
 
-func (x *User) GetLinkedin() string {
+func (x *User) GetLinkedIn() string {
 	if x != nil {
-		return x.Linkedin
+		return x.LinkedIn
 	}
 	return ""
 }
@@ -667,6 +852,426 @@ func (x *User) GetAlipay() string {
 func (x *User) GetCasdoor() string {
 	if x != nil {
 		return x.Casdoor
+	}
+	return ""
+}
+
+func (x *User) GetInfoflow() string {
+	if x != nil {
+		return x.Infoflow
+	}
+	return ""
+}
+
+func (x *User) GetApple() string {
+	if x != nil {
+		return x.Apple
+	}
+	return ""
+}
+
+func (x *User) GetAzureAd() string {
+	if x != nil {
+		return x.AzureAd
+	}
+	return ""
+}
+
+func (x *User) GetSlack() string {
+	if x != nil {
+		return x.Slack
+	}
+	return ""
+}
+
+func (x *User) GetSteam() string {
+	if x != nil {
+		return x.Steam
+	}
+	return ""
+}
+
+func (x *User) GetBilibili() string {
+	if x != nil {
+		return x.Bilibili
+	}
+	return ""
+}
+
+func (x *User) GetOkta() string {
+	if x != nil {
+		return x.Okta
+	}
+	return ""
+}
+
+func (x *User) GetDouyin() string {
+	if x != nil {
+		return x.Douyin
+	}
+	return ""
+}
+
+func (x *User) GetLine() string {
+	if x != nil {
+		return x.Line
+	}
+	return ""
+}
+
+func (x *User) GetAmazon() string {
+	if x != nil {
+		return x.Amazon
+	}
+	return ""
+}
+
+func (x *User) GetAuth0() string {
+	if x != nil {
+		return x.Auth0
+	}
+	return ""
+}
+
+func (x *User) GetBattleNet() string {
+	if x != nil {
+		return x.BattleNet
+	}
+	return ""
+}
+
+func (x *User) GetBitbucket() string {
+	if x != nil {
+		return x.Bitbucket
+	}
+	return ""
+}
+
+func (x *User) GetBox() string {
+	if x != nil {
+		return x.Box
+	}
+	return ""
+}
+
+func (x *User) GetCloudFoundry() string {
+	if x != nil {
+		return x.CloudFoundry
+	}
+	return ""
+}
+
+func (x *User) GetDailymotion() string {
+	if x != nil {
+		return x.Dailymotion
+	}
+	return ""
+}
+
+func (x *User) GetDeezer() string {
+	if x != nil {
+		return x.Deezer
+	}
+	return ""
+}
+
+func (x *User) GetDigitalOcean() string {
+	if x != nil {
+		return x.DigitalOcean
+	}
+	return ""
+}
+
+func (x *User) GetDiscord() string {
+	if x != nil {
+		return x.Discord
+	}
+	return ""
+}
+
+func (x *User) GetDropbox() string {
+	if x != nil {
+		return x.Dropbox
+	}
+	return ""
+}
+
+func (x *User) GetEveOnline() string {
+	if x != nil {
+		return x.EveOnline
+	}
+	return ""
+}
+
+func (x *User) GetFitbit() string {
+	if x != nil {
+		return x.Fitbit
+	}
+	return ""
+}
+
+func (x *User) GetGitea() string {
+	if x != nil {
+		return x.Gitea
+	}
+	return ""
+}
+
+func (x *User) GetHeroku() string {
+	if x != nil {
+		return x.Heroku
+	}
+	return ""
+}
+
+func (x *User) GetInfluxCloud() string {
+	if x != nil {
+		return x.InfluxCloud
+	}
+	return ""
+}
+
+func (x *User) GetInstagram() string {
+	if x != nil {
+		return x.Instagram
+	}
+	return ""
+}
+
+func (x *User) GetIntercom() string {
+	if x != nil {
+		return x.Intercom
+	}
+	return ""
+}
+
+func (x *User) GetKakao() string {
+	if x != nil {
+		return x.Kakao
+	}
+	return ""
+}
+
+func (x *User) GetLastfm() string {
+	if x != nil {
+		return x.Lastfm
+	}
+	return ""
+}
+
+func (x *User) GetMailru() string {
+	if x != nil {
+		return x.Mailru
+	}
+	return ""
+}
+
+func (x *User) GetMeetup() string {
+	if x != nil {
+		return x.Meetup
+	}
+	return ""
+}
+
+func (x *User) GetMicrosoftOnline() string {
+	if x != nil {
+		return x.MicrosoftOnline
+	}
+	return ""
+}
+
+func (x *User) GetNaver() string {
+	if x != nil {
+		return x.Naver
+	}
+	return ""
+}
+
+func (x *User) GetNextcloud() string {
+	if x != nil {
+		return x.Nextcloud
+	}
+	return ""
+}
+
+func (x *User) GetOneDrive() string {
+	if x != nil {
+		return x.OneDrive
+	}
+	return ""
+}
+
+func (x *User) GetOura() string {
+	if x != nil {
+		return x.Oura
+	}
+	return ""
+}
+
+func (x *User) GetPatreon() string {
+	if x != nil {
+		return x.Patreon
+	}
+	return ""
+}
+
+func (x *User) GetPaypal() string {
+	if x != nil {
+		return x.Paypal
+	}
+	return ""
+}
+
+func (x *User) GetSalesForce() string {
+	if x != nil {
+		return x.SalesForce
+	}
+	return ""
+}
+
+func (x *User) GetShopify() string {
+	if x != nil {
+		return x.Shopify
+	}
+	return ""
+}
+
+func (x *User) GetSoundcloud() string {
+	if x != nil {
+		return x.Soundcloud
+	}
+	return ""
+}
+
+func (x *User) GetSpotify() string {
+	if x != nil {
+		return x.Spotify
+	}
+	return ""
+}
+
+func (x *User) GetStrava() string {
+	if x != nil {
+		return x.Strava
+	}
+	return ""
+}
+
+func (x *User) GetStripe() string {
+	if x != nil {
+		return x.Stripe
+	}
+	return ""
+}
+
+func (x *User) GetTikTok() string {
+	if x != nil {
+		return x.TikTok
+	}
+	return ""
+}
+
+func (x *User) GetTumblr() string {
+	if x != nil {
+		return x.Tumblr
+	}
+	return ""
+}
+
+func (x *User) GetTwitch() string {
+	if x != nil {
+		return x.Twitch
+	}
+	return ""
+}
+
+func (x *User) GetTwitter() string {
+	if x != nil {
+		return x.Twitter
+	}
+	return ""
+}
+
+func (x *User) GetTypetalk() string {
+	if x != nil {
+		return x.Typetalk
+	}
+	return ""
+}
+
+func (x *User) GetUber() string {
+	if x != nil {
+		return x.Uber
+	}
+	return ""
+}
+
+func (x *User) GetVk() string {
+	if x != nil {
+		return x.Vk
+	}
+	return ""
+}
+
+func (x *User) GetWepay() string {
+	if x != nil {
+		return x.Wepay
+	}
+	return ""
+}
+
+func (x *User) GetXero() string {
+	if x != nil {
+		return x.Xero
+	}
+	return ""
+}
+
+func (x *User) GetYahoo() string {
+	if x != nil {
+		return x.Yahoo
+	}
+	return ""
+}
+
+func (x *User) GetYammer() string {
+	if x != nil {
+		return x.Yammer
+	}
+	return ""
+}
+
+func (x *User) GetYandex() string {
+	if x != nil {
+		return x.Yandex
+	}
+	return ""
+}
+
+func (x *User) GetZoom() string {
+	if x != nil {
+		return x.Zoom
+	}
+	return ""
+}
+
+func (x *User) GetMetaMask() string {
+	if x != nil {
+		return x.MetaMask
+	}
+	return ""
+}
+
+func (x *User) GetWeb3Onboard() string {
+	if x != nil {
+		return x.Web3Onboard
+	}
+	return ""
+}
+
+func (x *User) GetCustom() string {
+	if x != nil {
+		return x.Custom
 	}
 	return ""
 }
@@ -734,6 +1339,20 @@ func (x *User) GetProperties() map[string]string {
 	return nil
 }
 
+func (x *User) GetRole() *Role {
+	if x != nil {
+		return x.Role
+	}
+	return nil
+}
+
+func (x *User) GetPermission() *Permission {
+	if x != nil {
+		return x.Permission
+	}
+	return nil
+}
+
 func (x *User) GetGroups() []string {
 	if x != nil {
 		return x.Groups
@@ -769,6 +1388,27 @@ func (x *User) GetManagedAccounts() []*ManagedAccount {
 	return nil
 }
 
+func (x *User) GetMfaAccounts() []*MfaAccount {
+	if x != nil {
+		return x.MfaAccounts
+	}
+	return nil
+}
+
+func (x *User) GetMfaItems() []*MfaItem {
+	if x != nil {
+		return x.MfaItems
+	}
+	return nil
+}
+
+func (x *User) GetMfaRememberDeadline() string {
+	if x != nil {
+		return x.MfaRememberDeadline
+	}
+	return ""
+}
+
 func (x *User) GetNeedUpdatePassword() bool {
 	if x != nil {
 		return x.NeedUpdatePassword
@@ -776,16 +1416,24 @@ func (x *User) GetNeedUpdatePassword() bool {
 	return false
 }
 
+func (x *User) GetIpWhitelist() string {
+	if x != nil {
+		return x.IpWhitelist
+	}
+	return ""
+}
+
 type GetUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` // format: "owner/name"
+	UserName      string                 `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"` // format: "owner/name"
+	UserOwner     string                 `protobuf:"bytes,2,opt,name=user_owner,json=userOwner,proto3" json:"user_owner,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserRequest) Reset() {
 	*x = GetUserRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[2]
+	mi := &file_api_v1_user_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -797,7 +1445,7 @@ func (x *GetUserRequest) String() string {
 func (*GetUserRequest) ProtoMessage() {}
 
 func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[2]
+	mi := &file_api_v1_user_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -810,12 +1458,19 @@ func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
 func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{2}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetUserRequest) GetId() string {
+func (x *GetUserRequest) GetUserName() string {
 	if x != nil {
-		return x.Id
+		return x.UserName
+	}
+	return ""
+}
+
+func (x *GetUserRequest) GetUserOwner() string {
+	if x != nil {
+		return x.UserOwner
 	}
 	return ""
 }
@@ -830,7 +1485,7 @@ type GetUserByEmailRequest struct {
 
 func (x *GetUserByEmailRequest) Reset() {
 	*x = GetUserByEmailRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[3]
+	mi := &file_api_v1_user_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -842,7 +1497,7 @@ func (x *GetUserByEmailRequest) String() string {
 func (*GetUserByEmailRequest) ProtoMessage() {}
 
 func (x *GetUserByEmailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[3]
+	mi := &file_api_v1_user_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,7 +1510,7 @@ func (x *GetUserByEmailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserByEmailRequest.ProtoReflect.Descriptor instead.
 func (*GetUserByEmailRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{3}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetUserByEmailRequest) GetOwner() string {
@@ -882,7 +1537,7 @@ type GetUserByPhoneRequest struct {
 
 func (x *GetUserByPhoneRequest) Reset() {
 	*x = GetUserByPhoneRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[4]
+	mi := &file_api_v1_user_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -894,7 +1549,7 @@ func (x *GetUserByPhoneRequest) String() string {
 func (*GetUserByPhoneRequest) ProtoMessage() {}
 
 func (x *GetUserByPhoneRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[4]
+	mi := &file_api_v1_user_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -907,7 +1562,7 @@ func (x *GetUserByPhoneRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserByPhoneRequest.ProtoReflect.Descriptor instead.
 func (*GetUserByPhoneRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{4}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetUserByPhoneRequest) GetOwner() string {
@@ -934,7 +1589,7 @@ type GetUserByUserIdRequest struct {
 
 func (x *GetUserByUserIdRequest) Reset() {
 	*x = GetUserByUserIdRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[5]
+	mi := &file_api_v1_user_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -946,7 +1601,7 @@ func (x *GetUserByUserIdRequest) String() string {
 func (*GetUserByUserIdRequest) ProtoMessage() {}
 
 func (x *GetUserByUserIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[5]
+	mi := &file_api_v1_user_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -959,7 +1614,7 @@ func (x *GetUserByUserIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserByUserIdRequest.ProtoReflect.Descriptor instead.
 func (*GetUserByUserIdRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{5}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetUserByUserIdRequest) GetOwner() string {
@@ -985,7 +1640,7 @@ type GetUsersRequest struct {
 
 func (x *GetUsersRequest) Reset() {
 	*x = GetUsersRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[6]
+	mi := &file_api_v1_user_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -997,7 +1652,7 @@ func (x *GetUsersRequest) String() string {
 func (*GetUsersRequest) ProtoMessage() {}
 
 func (x *GetUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[6]
+	mi := &file_api_v1_user_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1010,7 +1665,7 @@ func (x *GetUsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUsersRequest.ProtoReflect.Descriptor instead.
 func (*GetUsersRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{6}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetUsersRequest) GetOwner() string {
@@ -1031,7 +1686,7 @@ type GetSortedUsersRequest struct {
 
 func (x *GetSortedUsersRequest) Reset() {
 	*x = GetSortedUsersRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[7]
+	mi := &file_api_v1_user_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1043,7 +1698,7 @@ func (x *GetSortedUsersRequest) String() string {
 func (*GetSortedUsersRequest) ProtoMessage() {}
 
 func (x *GetSortedUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[7]
+	mi := &file_api_v1_user_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1056,7 +1711,7 @@ func (x *GetSortedUsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSortedUsersRequest.ProtoReflect.Descriptor instead.
 func (*GetSortedUsersRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{7}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetSortedUsersRequest) GetOwner() string {
@@ -1092,7 +1747,7 @@ type GetPaginationUsersRequest struct {
 
 func (x *GetPaginationUsersRequest) Reset() {
 	*x = GetPaginationUsersRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[8]
+	mi := &file_api_v1_user_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1104,7 +1759,7 @@ func (x *GetPaginationUsersRequest) String() string {
 func (*GetPaginationUsersRequest) ProtoMessage() {}
 
 func (x *GetPaginationUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[8]
+	mi := &file_api_v1_user_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1117,7 +1772,7 @@ func (x *GetPaginationUsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPaginationUsersRequest.ProtoReflect.Descriptor instead.
 func (*GetPaginationUsersRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{8}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetPaginationUsersRequest) GetOwner() string {
@@ -1158,7 +1813,7 @@ type GetUserCountRequest struct {
 
 func (x *GetUserCountRequest) Reset() {
 	*x = GetUserCountRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[9]
+	mi := &file_api_v1_user_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1170,7 +1825,7 @@ func (x *GetUserCountRequest) String() string {
 func (*GetUserCountRequest) ProtoMessage() {}
 
 func (x *GetUserCountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[9]
+	mi := &file_api_v1_user_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1183,7 +1838,7 @@ func (x *GetUserCountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserCountRequest.ProtoReflect.Descriptor instead.
 func (*GetUserCountRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{9}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetUserCountRequest) GetOwner() string {
@@ -1212,7 +1867,7 @@ type SetPasswordRequest struct {
 
 func (x *SetPasswordRequest) Reset() {
 	*x = SetPasswordRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[10]
+	mi := &file_api_v1_user_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1224,7 +1879,7 @@ func (x *SetPasswordRequest) String() string {
 func (*SetPasswordRequest) ProtoMessage() {}
 
 func (x *SetPasswordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[10]
+	mi := &file_api_v1_user_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1237,7 +1892,7 @@ func (x *SetPasswordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetPasswordRequest.ProtoReflect.Descriptor instead.
 func (*SetPasswordRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{10}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SetPasswordRequest) GetUserOwner() string {
@@ -1277,7 +1932,7 @@ type AddUserRequest struct {
 
 func (x *AddUserRequest) Reset() {
 	*x = AddUserRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[11]
+	mi := &file_api_v1_user_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1289,7 +1944,7 @@ func (x *AddUserRequest) String() string {
 func (*AddUserRequest) ProtoMessage() {}
 
 func (x *AddUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[11]
+	mi := &file_api_v1_user_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1302,7 +1957,7 @@ func (x *AddUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddUserRequest.ProtoReflect.Descriptor instead.
 func (*AddUserRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{11}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *AddUserRequest) GetUser() *User {
@@ -1322,7 +1977,7 @@ type UpdateUserRequest struct {
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[12]
+	mi := &file_api_v1_user_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1334,7 +1989,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[12]
+	mi := &file_api_v1_user_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1347,7 +2002,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{12}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateUserRequest) GetUser() *User {
@@ -1373,7 +2028,7 @@ type DeleteUserRequest struct {
 
 func (x *DeleteUserRequest) Reset() {
 	*x = DeleteUserRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[13]
+	mi := &file_api_v1_user_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1385,7 +2040,7 @@ func (x *DeleteUserRequest) String() string {
 func (*DeleteUserRequest) ProtoMessage() {}
 
 func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[13]
+	mi := &file_api_v1_user_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1398,7 +2053,7 @@ func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserRequest.ProtoReflect.Descriptor instead.
 func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{13}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *DeleteUserRequest) GetUser() *User {
@@ -1417,7 +2072,7 @@ type CheckUserPasswordRequest struct {
 
 func (x *CheckUserPasswordRequest) Reset() {
 	*x = CheckUserPasswordRequest{}
-	mi := &file_api_v1_user_proto_msgTypes[14]
+	mi := &file_api_v1_user_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1429,7 +2084,7 @@ func (x *CheckUserPasswordRequest) String() string {
 func (*CheckUserPasswordRequest) ProtoMessage() {}
 
 func (x *CheckUserPasswordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[14]
+	mi := &file_api_v1_user_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1442,7 +2097,7 @@ func (x *CheckUserPasswordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckUserPasswordRequest.ProtoReflect.Descriptor instead.
 func (*CheckUserPasswordRequest) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{14}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CheckUserPasswordRequest) GetUser() *User {
@@ -1462,7 +2117,7 @@ type BoolResponse struct {
 
 func (x *BoolResponse) Reset() {
 	*x = BoolResponse{}
-	mi := &file_api_v1_user_proto_msgTypes[15]
+	mi := &file_api_v1_user_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1474,7 +2129,7 @@ func (x *BoolResponse) String() string {
 func (*BoolResponse) ProtoMessage() {}
 
 func (x *BoolResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[15]
+	mi := &file_api_v1_user_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1487,7 +2142,7 @@ func (x *BoolResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BoolResponse.ProtoReflect.Descriptor instead.
 func (*BoolResponse) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{15}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *BoolResponse) GetOk() bool {
@@ -1506,7 +2161,7 @@ type UserResponse struct {
 
 func (x *UserResponse) Reset() {
 	*x = UserResponse{}
-	mi := &file_api_v1_user_proto_msgTypes[16]
+	mi := &file_api_v1_user_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1518,7 +2173,7 @@ func (x *UserResponse) String() string {
 func (*UserResponse) ProtoMessage() {}
 
 func (x *UserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[16]
+	mi := &file_api_v1_user_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1531,7 +2186,7 @@ func (x *UserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserResponse.ProtoReflect.Descriptor instead.
 func (*UserResponse) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{16}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *UserResponse) GetUser() *User {
@@ -1550,7 +2205,7 @@ type UsersResponse struct {
 
 func (x *UsersResponse) Reset() {
 	*x = UsersResponse{}
-	mi := &file_api_v1_user_proto_msgTypes[17]
+	mi := &file_api_v1_user_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1562,7 +2217,7 @@ func (x *UsersResponse) String() string {
 func (*UsersResponse) ProtoMessage() {}
 
 func (x *UsersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[17]
+	mi := &file_api_v1_user_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1575,7 +2230,7 @@ func (x *UsersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsersResponse.ProtoReflect.Descriptor instead.
 func (*UsersResponse) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{17}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UsersResponse) GetUsers() []*User {
@@ -1595,7 +2250,7 @@ type PaginatedUsersResponse struct {
 
 func (x *PaginatedUsersResponse) Reset() {
 	*x = PaginatedUsersResponse{}
-	mi := &file_api_v1_user_proto_msgTypes[18]
+	mi := &file_api_v1_user_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1607,7 +2262,7 @@ func (x *PaginatedUsersResponse) String() string {
 func (*PaginatedUsersResponse) ProtoMessage() {}
 
 func (x *PaginatedUsersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[18]
+	mi := &file_api_v1_user_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1620,7 +2275,7 @@ func (x *PaginatedUsersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaginatedUsersResponse.ProtoReflect.Descriptor instead.
 func (*PaginatedUsersResponse) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{18}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *PaginatedUsersResponse) GetUsers() []*User {
@@ -1646,7 +2301,7 @@ type CountResponse struct {
 
 func (x *CountResponse) Reset() {
 	*x = CountResponse{}
-	mi := &file_api_v1_user_proto_msgTypes[19]
+	mi := &file_api_v1_user_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1658,7 +2313,7 @@ func (x *CountResponse) String() string {
 func (*CountResponse) ProtoMessage() {}
 
 func (x *CountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_v1_user_proto_msgTypes[19]
+	mi := &file_api_v1_user_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1671,7 +2326,7 @@ func (x *CountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountResponse.ProtoReflect.Descriptor instead.
 func (*CountResponse) Descriptor() ([]byte, []int) {
-	return file_api_v1_user_proto_rawDescGZIP(), []int{19}
+	return file_api_v1_user_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *CountResponse) GetCount() int32 {
@@ -1685,13 +2340,23 @@ var File_api_v1_user_proto protoreflect.FileDescriptor
 
 const file_api_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x11api/v1/user.proto\x12\x06api.v1\"\x89\x01\n" +
+	"\x11api/v1/user.proto\x12\x06api.v1\x1a\x17api/v1/permission.proto\x1a\x11api/v1/role.proto\"\x89\x01\n" +
 	"\x0eManagedAccount\x12 \n" +
 	"\vapplication\x18\x01 \x01(\tR\vapplication\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x1d\n" +
 	"\n" +
-	"signin_url\x18\x04 \x01(\tR\tsigninUrl\"\x8f\x14\n" +
+	"signin_url\x18\x04 \x01(\tR\tsigninUrl\"~\n" +
+	"\n" +
+	"MfaAccount\x12!\n" +
+	"\faccount_name\x18\x01 \x01(\tR\vaccountName\x12\x16\n" +
+	"\x06issuer\x18\x02 \x01(\tR\x06issuer\x12\x1d\n" +
+	"\n" +
+	"secret_key\x18\x03 \x01(\tR\tsecretKey\x12\x16\n" +
+	"\x06origin\x18\x04 \x01(\tR\x06origin\"1\n" +
+	"\aMfaItem\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04rule\x18\x02 \x01(\tR\x04rule\"\xc9\"\n" +
 	"\x04User\x12\x14\n" +
 	"\x05owner\x18\x01 \x01(\tR\x05owner\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
@@ -1750,48 +2415,123 @@ const file_api_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"created_ip\x180 \x01(\tR\tcreatedIp\x12(\n" +
 	"\x10last_signin_time\x181 \x01(\tR\x0elastSigninTime\x12$\n" +
-	"\x0elast_signin_ip\x182 \x01(\tR\flastSigninIp\x12\x16\n" +
-	"\x06github\x183 \x01(\tR\x06github\x12\x16\n" +
+	"\x0elast_signin_ip\x182 \x01(\tR\flastSigninIp\x12\x17\n" +
+	"\agit_hub\x183 \x01(\tR\x06gitHub\x12\x16\n" +
 	"\x06google\x184 \x01(\tR\x06google\x12\x0e\n" +
-	"\x02qq\x185 \x01(\tR\x02qq\x12\x16\n" +
-	"\x06wechat\x186 \x01(\tR\x06wechat\x12\x1a\n" +
-	"\bfacebook\x187 \x01(\tR\bfacebook\x12\x1a\n" +
-	"\bdingtalk\x188 \x01(\tR\bdingtalk\x12\x14\n" +
+	"\x02qq\x185 \x01(\tR\x02qq\x12\x17\n" +
+	"\awe_chat\x186 \x01(\tR\x06weChat\x12\x1a\n" +
+	"\bfacebook\x187 \x01(\tR\bfacebook\x12\x1b\n" +
+	"\tding_talk\x188 \x01(\tR\bdingTalk\x12\x14\n" +
 	"\x05weibo\x189 \x01(\tR\x05weibo\x12\x14\n" +
-	"\x05gitee\x18: \x01(\tR\x05gitee\x12\x1a\n" +
-	"\blinkedin\x18; \x01(\tR\blinkedin\x12\x14\n" +
+	"\x05gitee\x18: \x01(\tR\x05gitee\x12\x1b\n" +
+	"\tlinked_in\x18; \x01(\tR\blinkedIn\x12\x14\n" +
 	"\x05wecom\x18< \x01(\tR\x05wecom\x12\x12\n" +
 	"\x04lark\x18= \x01(\tR\x04lark\x12\x16\n" +
 	"\x06gitlab\x18> \x01(\tR\x06gitlab\x12\x12\n" +
 	"\x04adfs\x18? \x01(\tR\x04adfs\x12\x14\n" +
 	"\x05baidu\x18@ \x01(\tR\x05baidu\x12\x16\n" +
 	"\x06alipay\x18A \x01(\tR\x06alipay\x12\x18\n" +
-	"\acasdoor\x18B \x01(\tR\acasdoor\x12,\n" +
-	"\x12preferred_mfa_type\x18C \x01(\tR\x10preferredMfaType\x12%\n" +
-	"\x0erecovery_codes\x18D \x03(\tR\rrecoveryCodes\x12\x1f\n" +
-	"\vtotp_secret\x18E \x01(\tR\n" +
-	"totpSecret\x12*\n" +
-	"\x11mfa_phone_enabled\x18F \x01(\bR\x0fmfaPhoneEnabled\x12*\n" +
-	"\x11mfa_email_enabled\x18G \x01(\bR\x0fmfaEmailEnabled\x12\x1e\n" +
+	"\acasdoor\x18B \x01(\tR\acasdoor\x12\x1a\n" +
+	"\binfoflow\x18C \x01(\tR\binfoflow\x12\x14\n" +
+	"\x05apple\x18D \x01(\tR\x05apple\x12\x19\n" +
+	"\bazure_ad\x18E \x01(\tR\aazureAd\x12\x14\n" +
+	"\x05slack\x18F \x01(\tR\x05slack\x12\x14\n" +
+	"\x05steam\x18G \x01(\tR\x05steam\x12\x1a\n" +
+	"\bbilibili\x18H \x01(\tR\bbilibili\x12\x12\n" +
+	"\x04okta\x18I \x01(\tR\x04okta\x12\x16\n" +
+	"\x06douyin\x18J \x01(\tR\x06douyin\x12\x12\n" +
+	"\x04line\x18K \x01(\tR\x04line\x12\x16\n" +
+	"\x06amazon\x18L \x01(\tR\x06amazon\x12\x14\n" +
+	"\x05auth0\x18M \x01(\tR\x05auth0\x12\x1d\n" +
 	"\n" +
-	"invitation\x18H \x01(\tR\n" +
-	"invitation\x12'\n" +
-	"\x0finvitation_code\x18I \x01(\tR\x0einvitationCode\x12\x12\n" +
-	"\x04ldap\x18J \x01(\tR\x04ldap\x12<\n" +
+	"battle_net\x18N \x01(\tR\tbattleNet\x12\x1c\n" +
+	"\tbitbucket\x18O \x01(\tR\tbitbucket\x12\x10\n" +
+	"\x03box\x18P \x01(\tR\x03box\x12#\n" +
+	"\rcloud_foundry\x18Q \x01(\tR\fcloudFoundry\x12 \n" +
+	"\vdailymotion\x18R \x01(\tR\vdailymotion\x12\x16\n" +
+	"\x06deezer\x18S \x01(\tR\x06deezer\x12#\n" +
+	"\rdigital_ocean\x18T \x01(\tR\fdigitalOcean\x12\x18\n" +
+	"\adiscord\x18U \x01(\tR\adiscord\x12\x18\n" +
+	"\adropbox\x18V \x01(\tR\adropbox\x12\x1d\n" +
 	"\n" +
-	"properties\x18K \x03(\v2\x1c.api.v1.User.PropertiesEntryR\n" +
-	"properties\x12\x16\n" +
-	"\x06groups\x18L \x03(\tR\x06groups\x129\n" +
-	"\x19last_change_password_time\x18M \x01(\tR\x16lastChangePasswordTime\x123\n" +
-	"\x16last_signin_wrong_time\x18N \x01(\tR\x13lastSigninWrongTime\x12,\n" +
-	"\x12signin_wrong_times\x18O \x01(\x05R\x10signinWrongTimes\x12A\n" +
-	"\x10managed_accounts\x18P \x03(\v2\x16.api.v1.ManagedAccountR\x0fmanagedAccounts\x120\n" +
-	"\x14need_update_password\x18Q \x01(\bR\x12needUpdatePassword\x1a=\n" +
+	"eve_online\x18W \x01(\tR\teveOnline\x12\x16\n" +
+	"\x06fitbit\x18X \x01(\tR\x06fitbit\x12\x14\n" +
+	"\x05gitea\x18Y \x01(\tR\x05gitea\x12\x16\n" +
+	"\x06heroku\x18Z \x01(\tR\x06heroku\x12!\n" +
+	"\finflux_cloud\x18[ \x01(\tR\vinfluxCloud\x12\x1c\n" +
+	"\tinstagram\x18\\ \x01(\tR\tinstagram\x12\x1a\n" +
+	"\bintercom\x18] \x01(\tR\bintercom\x12\x14\n" +
+	"\x05kakao\x18^ \x01(\tR\x05kakao\x12\x16\n" +
+	"\x06lastfm\x18_ \x01(\tR\x06lastfm\x12\x16\n" +
+	"\x06mailru\x18` \x01(\tR\x06mailru\x12\x16\n" +
+	"\x06meetup\x18a \x01(\tR\x06meetup\x12)\n" +
+	"\x10microsoft_online\x18b \x01(\tR\x0fmicrosoftOnline\x12\x14\n" +
+	"\x05naver\x18c \x01(\tR\x05naver\x12\x1c\n" +
+	"\tnextcloud\x18d \x01(\tR\tnextcloud\x12\x1b\n" +
+	"\tone_drive\x18e \x01(\tR\boneDrive\x12\x12\n" +
+	"\x04oura\x18f \x01(\tR\x04oura\x12\x18\n" +
+	"\apatreon\x18g \x01(\tR\apatreon\x12\x16\n" +
+	"\x06paypal\x18h \x01(\tR\x06paypal\x12\x1f\n" +
+	"\vsales_force\x18i \x01(\tR\n" +
+	"salesForce\x12\x18\n" +
+	"\ashopify\x18j \x01(\tR\ashopify\x12\x1e\n" +
+	"\n" +
+	"soundcloud\x18k \x01(\tR\n" +
+	"soundcloud\x12\x18\n" +
+	"\aspotify\x18l \x01(\tR\aspotify\x12\x16\n" +
+	"\x06strava\x18m \x01(\tR\x06strava\x12\x16\n" +
+	"\x06stripe\x18n \x01(\tR\x06stripe\x12\x17\n" +
+	"\atik_tok\x18o \x01(\tR\x06tikTok\x12\x16\n" +
+	"\x06tumblr\x18p \x01(\tR\x06tumblr\x12\x16\n" +
+	"\x06twitch\x18q \x01(\tR\x06twitch\x12\x18\n" +
+	"\atwitter\x18r \x01(\tR\atwitter\x12\x1a\n" +
+	"\btypetalk\x18s \x01(\tR\btypetalk\x12\x12\n" +
+	"\x04uber\x18t \x01(\tR\x04uber\x12\x0e\n" +
+	"\x02vk\x18u \x01(\tR\x02vk\x12\x14\n" +
+	"\x05wepay\x18v \x01(\tR\x05wepay\x12\x12\n" +
+	"\x04xero\x18w \x01(\tR\x04xero\x12\x14\n" +
+	"\x05yahoo\x18x \x01(\tR\x05yahoo\x12\x16\n" +
+	"\x06yammer\x18y \x01(\tR\x06yammer\x12\x16\n" +
+	"\x06yandex\x18z \x01(\tR\x06yandex\x12\x12\n" +
+	"\x04zoom\x18{ \x01(\tR\x04zoom\x12\x1b\n" +
+	"\tmeta_mask\x18| \x01(\tR\bmetaMask\x12!\n" +
+	"\fweb3_onboard\x18} \x01(\tR\vweb3Onboard\x12\x16\n" +
+	"\x06custom\x18~ \x01(\tR\x06custom\x12,\n" +
+	"\x12preferred_mfa_type\x18\x7f \x01(\tR\x10preferredMfaType\x12&\n" +
+	"\x0erecovery_codes\x18\x80\x01 \x03(\tR\rrecoveryCodes\x12 \n" +
+	"\vtotp_secret\x18\x81\x01 \x01(\tR\n" +
+	"totpSecret\x12+\n" +
+	"\x11mfa_phone_enabled\x18\x82\x01 \x01(\bR\x0fmfaPhoneEnabled\x12+\n" +
+	"\x11mfa_email_enabled\x18\x83\x01 \x01(\bR\x0fmfaEmailEnabled\x12\x1f\n" +
+	"\n" +
+	"invitation\x18\x84\x01 \x01(\tR\n" +
+	"invitation\x12(\n" +
+	"\x0finvitation_code\x18\x85\x01 \x01(\tR\x0einvitationCode\x12\x13\n" +
+	"\x04ldap\x18\x86\x01 \x01(\tR\x04ldap\x12=\n" +
+	"\n" +
+	"properties\x18\x87\x01 \x03(\v2\x1c.api.v1.User.PropertiesEntryR\n" +
+	"properties\x12!\n" +
+	"\x04role\x18\x88\x01 \x01(\v2\f.api.v1.RoleR\x04role\x123\n" +
+	"\n" +
+	"permission\x18\x89\x01 \x01(\v2\x12.api.v1.PermissionR\n" +
+	"permission\x12\x17\n" +
+	"\x06groups\x18\x8a\x01 \x03(\tR\x06groups\x12:\n" +
+	"\x19last_change_password_time\x18\x8b\x01 \x01(\tR\x16lastChangePasswordTime\x124\n" +
+	"\x16last_signin_wrong_time\x18\x8c\x01 \x01(\tR\x13lastSigninWrongTime\x12-\n" +
+	"\x12signin_wrong_times\x18\x8d\x01 \x01(\x05R\x10signinWrongTimes\x12B\n" +
+	"\x10managed_accounts\x18\x8e\x01 \x03(\v2\x16.api.v1.ManagedAccountR\x0fmanagedAccounts\x126\n" +
+	"\fmfa_accounts\x18\x8f\x01 \x03(\v2\x12.api.v1.MfaAccountR\vmfaAccounts\x12-\n" +
+	"\tmfa_items\x18\x90\x01 \x03(\v2\x0f.api.v1.MfaItemR\bmfaItems\x123\n" +
+	"\x15mfa_remember_deadline\x18\x91\x01 \x01(\tR\x13mfaRememberDeadline\x121\n" +
+	"\x14need_update_password\x18\x92\x01 \x01(\bR\x12needUpdatePassword\x12\"\n" +
+	"\fip_whitelist\x18\x93\x01 \x01(\tR\vipWhitelist\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\" \n" +
-	"\x0eGetUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"C\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"L\n" +
+	"\x0eGetUserRequest\x12\x1b\n" +
+	"\tuser_name\x18\x01 \x01(\tR\buserName\x12\x1d\n" +
+	"\n" +
+	"user_owner\x18\x02 \x01(\tR\tuserOwner\"C\n" +
 	"\x15GetUserByEmailRequest\x12\x14\n" +
 	"\x05owner\x18\x01 \x01(\tR\x05owner\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\"C\n" +
@@ -1876,73 +2616,81 @@ func file_api_v1_user_proto_rawDescGZIP() []byte {
 	return file_api_v1_user_proto_rawDescData
 }
 
-var file_api_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_api_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_api_v1_user_proto_goTypes = []any{
 	(*ManagedAccount)(nil),            // 0: api.v1.ManagedAccount
-	(*User)(nil),                      // 1: api.v1.User
-	(*GetUserRequest)(nil),            // 2: api.v1.GetUserRequest
-	(*GetUserByEmailRequest)(nil),     // 3: api.v1.GetUserByEmailRequest
-	(*GetUserByPhoneRequest)(nil),     // 4: api.v1.GetUserByPhoneRequest
-	(*GetUserByUserIdRequest)(nil),    // 5: api.v1.GetUserByUserIdRequest
-	(*GetUsersRequest)(nil),           // 6: api.v1.GetUsersRequest
-	(*GetSortedUsersRequest)(nil),     // 7: api.v1.GetSortedUsersRequest
-	(*GetPaginationUsersRequest)(nil), // 8: api.v1.GetPaginationUsersRequest
-	(*GetUserCountRequest)(nil),       // 9: api.v1.GetUserCountRequest
-	(*SetPasswordRequest)(nil),        // 10: api.v1.SetPasswordRequest
-	(*AddUserRequest)(nil),            // 11: api.v1.AddUserRequest
-	(*UpdateUserRequest)(nil),         // 12: api.v1.UpdateUserRequest
-	(*DeleteUserRequest)(nil),         // 13: api.v1.DeleteUserRequest
-	(*CheckUserPasswordRequest)(nil),  // 14: api.v1.CheckUserPasswordRequest
-	(*BoolResponse)(nil),              // 15: api.v1.BoolResponse
-	(*UserResponse)(nil),              // 16: api.v1.UserResponse
-	(*UsersResponse)(nil),             // 17: api.v1.UsersResponse
-	(*PaginatedUsersResponse)(nil),    // 18: api.v1.PaginatedUsersResponse
-	(*CountResponse)(nil),             // 19: api.v1.CountResponse
-	nil,                               // 20: api.v1.User.PropertiesEntry
-	nil,                               // 21: api.v1.GetPaginationUsersRequest.QueryEntry
+	(*MfaAccount)(nil),                // 1: api.v1.MfaAccount
+	(*MfaItem)(nil),                   // 2: api.v1.MfaItem
+	(*User)(nil),                      // 3: api.v1.User
+	(*GetUserRequest)(nil),            // 4: api.v1.GetUserRequest
+	(*GetUserByEmailRequest)(nil),     // 5: api.v1.GetUserByEmailRequest
+	(*GetUserByPhoneRequest)(nil),     // 6: api.v1.GetUserByPhoneRequest
+	(*GetUserByUserIdRequest)(nil),    // 7: api.v1.GetUserByUserIdRequest
+	(*GetUsersRequest)(nil),           // 8: api.v1.GetUsersRequest
+	(*GetSortedUsersRequest)(nil),     // 9: api.v1.GetSortedUsersRequest
+	(*GetPaginationUsersRequest)(nil), // 10: api.v1.GetPaginationUsersRequest
+	(*GetUserCountRequest)(nil),       // 11: api.v1.GetUserCountRequest
+	(*SetPasswordRequest)(nil),        // 12: api.v1.SetPasswordRequest
+	(*AddUserRequest)(nil),            // 13: api.v1.AddUserRequest
+	(*UpdateUserRequest)(nil),         // 14: api.v1.UpdateUserRequest
+	(*DeleteUserRequest)(nil),         // 15: api.v1.DeleteUserRequest
+	(*CheckUserPasswordRequest)(nil),  // 16: api.v1.CheckUserPasswordRequest
+	(*BoolResponse)(nil),              // 17: api.v1.BoolResponse
+	(*UserResponse)(nil),              // 18: api.v1.UserResponse
+	(*UsersResponse)(nil),             // 19: api.v1.UsersResponse
+	(*PaginatedUsersResponse)(nil),    // 20: api.v1.PaginatedUsersResponse
+	(*CountResponse)(nil),             // 21: api.v1.CountResponse
+	nil,                               // 22: api.v1.User.PropertiesEntry
+	nil,                               // 23: api.v1.GetPaginationUsersRequest.QueryEntry
+	(*Role)(nil),                      // 24: api.v1.Role
+	(*Permission)(nil),                // 25: api.v1.Permission
 }
 var file_api_v1_user_proto_depIdxs = []int32{
-	20, // 0: api.v1.User.properties:type_name -> api.v1.User.PropertiesEntry
-	0,  // 1: api.v1.User.managed_accounts:type_name -> api.v1.ManagedAccount
-	21, // 2: api.v1.GetPaginationUsersRequest.query:type_name -> api.v1.GetPaginationUsersRequest.QueryEntry
-	1,  // 3: api.v1.AddUserRequest.user:type_name -> api.v1.User
-	1,  // 4: api.v1.UpdateUserRequest.user:type_name -> api.v1.User
-	1,  // 5: api.v1.DeleteUserRequest.user:type_name -> api.v1.User
-	1,  // 6: api.v1.CheckUserPasswordRequest.user:type_name -> api.v1.User
-	1,  // 7: api.v1.UserResponse.user:type_name -> api.v1.User
-	1,  // 8: api.v1.UsersResponse.users:type_name -> api.v1.User
-	1,  // 9: api.v1.PaginatedUsersResponse.users:type_name -> api.v1.User
-	2,  // 10: api.v1.UserService.GetUser:input_type -> api.v1.GetUserRequest
-	3,  // 11: api.v1.UserService.GetUserByEmail:input_type -> api.v1.GetUserByEmailRequest
-	4,  // 12: api.v1.UserService.GetUserByPhone:input_type -> api.v1.GetUserByPhoneRequest
-	5,  // 13: api.v1.UserService.GetUserByUserId:input_type -> api.v1.GetUserByUserIdRequest
-	6,  // 14: api.v1.UserService.GetUsers:input_type -> api.v1.GetUsersRequest
-	7,  // 15: api.v1.UserService.GetSortedUsers:input_type -> api.v1.GetSortedUsersRequest
-	8,  // 16: api.v1.UserService.GetPaginationUsers:input_type -> api.v1.GetPaginationUsersRequest
-	9,  // 17: api.v1.UserService.GetUserCount:input_type -> api.v1.GetUserCountRequest
-	11, // 18: api.v1.UserService.AddUser:input_type -> api.v1.AddUserRequest
-	12, // 19: api.v1.UserService.UpdateUser:input_type -> api.v1.UpdateUserRequest
-	13, // 20: api.v1.UserService.DeleteUser:input_type -> api.v1.DeleteUserRequest
-	10, // 21: api.v1.UserService.SetPassword:input_type -> api.v1.SetPasswordRequest
-	14, // 22: api.v1.UserService.CheckUserPassword:input_type -> api.v1.CheckUserPasswordRequest
-	16, // 23: api.v1.UserService.GetUser:output_type -> api.v1.UserResponse
-	16, // 24: api.v1.UserService.GetUserByEmail:output_type -> api.v1.UserResponse
-	16, // 25: api.v1.UserService.GetUserByPhone:output_type -> api.v1.UserResponse
-	16, // 26: api.v1.UserService.GetUserByUserId:output_type -> api.v1.UserResponse
-	17, // 27: api.v1.UserService.GetUsers:output_type -> api.v1.UsersResponse
-	17, // 28: api.v1.UserService.GetSortedUsers:output_type -> api.v1.UsersResponse
-	18, // 29: api.v1.UserService.GetPaginationUsers:output_type -> api.v1.PaginatedUsersResponse
-	19, // 30: api.v1.UserService.GetUserCount:output_type -> api.v1.CountResponse
-	15, // 31: api.v1.UserService.AddUser:output_type -> api.v1.BoolResponse
-	15, // 32: api.v1.UserService.UpdateUser:output_type -> api.v1.BoolResponse
-	15, // 33: api.v1.UserService.DeleteUser:output_type -> api.v1.BoolResponse
-	15, // 34: api.v1.UserService.SetPassword:output_type -> api.v1.BoolResponse
-	15, // 35: api.v1.UserService.CheckUserPassword:output_type -> api.v1.BoolResponse
-	23, // [23:36] is the sub-list for method output_type
-	10, // [10:23] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	22, // 0: api.v1.User.properties:type_name -> api.v1.User.PropertiesEntry
+	24, // 1: api.v1.User.role:type_name -> api.v1.Role
+	25, // 2: api.v1.User.permission:type_name -> api.v1.Permission
+	0,  // 3: api.v1.User.managed_accounts:type_name -> api.v1.ManagedAccount
+	1,  // 4: api.v1.User.mfa_accounts:type_name -> api.v1.MfaAccount
+	2,  // 5: api.v1.User.mfa_items:type_name -> api.v1.MfaItem
+	23, // 6: api.v1.GetPaginationUsersRequest.query:type_name -> api.v1.GetPaginationUsersRequest.QueryEntry
+	3,  // 7: api.v1.AddUserRequest.user:type_name -> api.v1.User
+	3,  // 8: api.v1.UpdateUserRequest.user:type_name -> api.v1.User
+	3,  // 9: api.v1.DeleteUserRequest.user:type_name -> api.v1.User
+	3,  // 10: api.v1.CheckUserPasswordRequest.user:type_name -> api.v1.User
+	3,  // 11: api.v1.UserResponse.user:type_name -> api.v1.User
+	3,  // 12: api.v1.UsersResponse.users:type_name -> api.v1.User
+	3,  // 13: api.v1.PaginatedUsersResponse.users:type_name -> api.v1.User
+	4,  // 14: api.v1.UserService.GetUser:input_type -> api.v1.GetUserRequest
+	5,  // 15: api.v1.UserService.GetUserByEmail:input_type -> api.v1.GetUserByEmailRequest
+	6,  // 16: api.v1.UserService.GetUserByPhone:input_type -> api.v1.GetUserByPhoneRequest
+	7,  // 17: api.v1.UserService.GetUserByUserId:input_type -> api.v1.GetUserByUserIdRequest
+	8,  // 18: api.v1.UserService.GetUsers:input_type -> api.v1.GetUsersRequest
+	9,  // 19: api.v1.UserService.GetSortedUsers:input_type -> api.v1.GetSortedUsersRequest
+	10, // 20: api.v1.UserService.GetPaginationUsers:input_type -> api.v1.GetPaginationUsersRequest
+	11, // 21: api.v1.UserService.GetUserCount:input_type -> api.v1.GetUserCountRequest
+	13, // 22: api.v1.UserService.AddUser:input_type -> api.v1.AddUserRequest
+	14, // 23: api.v1.UserService.UpdateUser:input_type -> api.v1.UpdateUserRequest
+	15, // 24: api.v1.UserService.DeleteUser:input_type -> api.v1.DeleteUserRequest
+	12, // 25: api.v1.UserService.SetPassword:input_type -> api.v1.SetPasswordRequest
+	16, // 26: api.v1.UserService.CheckUserPassword:input_type -> api.v1.CheckUserPasswordRequest
+	18, // 27: api.v1.UserService.GetUser:output_type -> api.v1.UserResponse
+	18, // 28: api.v1.UserService.GetUserByEmail:output_type -> api.v1.UserResponse
+	18, // 29: api.v1.UserService.GetUserByPhone:output_type -> api.v1.UserResponse
+	18, // 30: api.v1.UserService.GetUserByUserId:output_type -> api.v1.UserResponse
+	19, // 31: api.v1.UserService.GetUsers:output_type -> api.v1.UsersResponse
+	19, // 32: api.v1.UserService.GetSortedUsers:output_type -> api.v1.UsersResponse
+	20, // 33: api.v1.UserService.GetPaginationUsers:output_type -> api.v1.PaginatedUsersResponse
+	21, // 34: api.v1.UserService.GetUserCount:output_type -> api.v1.CountResponse
+	17, // 35: api.v1.UserService.AddUser:output_type -> api.v1.BoolResponse
+	17, // 36: api.v1.UserService.UpdateUser:output_type -> api.v1.BoolResponse
+	17, // 37: api.v1.UserService.DeleteUser:output_type -> api.v1.BoolResponse
+	17, // 38: api.v1.UserService.SetPassword:output_type -> api.v1.BoolResponse
+	17, // 39: api.v1.UserService.CheckUserPassword:output_type -> api.v1.BoolResponse
+	27, // [27:40] is the sub-list for method output_type
+	14, // [14:27] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_api_v1_user_proto_init() }
@@ -1950,13 +2698,15 @@ func file_api_v1_user_proto_init() {
 	if File_api_v1_user_proto != nil {
 		return
 	}
+	file_api_v1_permission_proto_init()
+	file_api_v1_role_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_v1_user_proto_rawDesc), len(file_api_v1_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -15,10 +15,13 @@
 package casdoorsdk
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"strconv"
+
+	"github.com/casdoor/casdoor-go-sdk/client/mapper"
 )
 
 const MfaRecoveryCodesSession = "mfa_recovery_codes"
@@ -316,19 +319,11 @@ func (c *Client) GetUserCount(isOnline string) (int, error) {
 }
 
 func (c *Client) GetUser(name string) (*User, error) {
-	queryMap := map[string]string{
-		"id": fmt.Sprintf("%s/%s", c.OrganizationName, name),
-	}
+	ctx := context.Background()
+	proto_user_response, err := c.GRPCClient.GetUser(c.withBasicAuth(ctx), name, c.OrganizationName)
 
-	url := c.GetUrl("get-user", queryMap)
+	user := mapper.ProtoUserResponseToUser(proto_user_response)
 
-	bytes, err := c.DoGetBytes(url)
-	if err != nil {
-		return nil, err
-	}
-
-	var user *User
-	err = json.Unmarshal(bytes, &user)
 	if err != nil {
 		return nil, err
 	}
